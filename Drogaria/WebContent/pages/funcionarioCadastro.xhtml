@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="funacao" value="#{funcionarioBean.acao}" />
+			<f:viewParam name="funcod" value="#{funcionarioBean.codigo}" />
+
+			<f:event listener="#{funcionarioBean.carregarCadastro}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frmFunCad">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText style="font-size:25px;" value="Funcionários" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:panelGrid id="pnlFunCadDados" columns="2">
+				<p:outputLabel style="font-size:15px;" value="Código:" />
+				<p:inputText size="10" readonly="true"
+					value="#{funcionarioBean.funcionarioCadastro.codigo}" />
+
+
+				<p:outputLabel style="font-size:15px;" value="Nome:" />
+				<p:inputText maxlength="50" size="30"
+					value="#{funcionarioBean.funcionarioCadastro.nome}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+
+				<p:outputLabel style="font-size:15px;" value="CPF:" />
+				<p:inputMask size="20" mask="999.999.999-99"
+					value="#{funcionarioBean.funcionarioCadastro.cpf}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputMask>
+
+
+				<p:outputLabel style="font-size:15px;" value="Senha:" />
+				<p:password maxlength="8" size="10"
+					value="#{funcionarioBean.funcionarioCadastro.senha}"
+					readonly="#{funcionarioBean.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:password>
+			</h:panelGrid>
+
+			<br></br>
+			
+			<p:outputLabel style="font-size:15px;" value="Função:" />
+			<p:selectOneMenu style="font-size:15px;"
+				value="#{funcionarioBean.funcionarioCadastro.funcao}"
+				readonly="#{funcionarioBean.acao == 'Excluir'}">
+				<f:validateBean />
+				<f:selectItem itemValue="" itemLabel="Selecione uma função:" />
+				<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+				<f:selectItem itemValue="Balconista" itemLabel="Balconista" />
+				<f:selectItem itemValue="Gerente" itemLabel="Gerente" />
+			</p:selectOneMenu>
+
+			<br></br>
+			<br></br>
+			<h:panelGrid columns="5">
+				<p:commandButton style="font-size:15px;" value="Novo"
+					actionListener="#{funcionarioBean.novo}"
+					update=":frmFunCad:pnlFunCadDados"
+					rendered="#{funcionarioBean.acao == 'Novo'}" />
+
+				<p:commandButton style="font-size:15px;" value="Salvar"
+					actionListener="#{funcionarioBean.salvar}"
+					update=":msgGlobal :frmFunCad:pnlFunCadDados"
+					rendered="#{funcionarioBean.acao == 'Novo'}" />
+
+				<p:button style="font-size:15px;" value="Voltar" outcome="/pages/funcionarioPesquisa.xhtml" />
+
+				<p:commandButton style="font-size:15px;" value="Excluir"
+					actionListener="#{funcionarioBean.excluir}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao == 'Excluir'}" />
+
+				<p:commandButton style="font-size:15px;" value="Editar"
+					actionListener="#{funcionarioBean.editar}" update=":msgGlobal"
+					rendered="#{funcionarioBean.acao == 'Editar'}" />
+
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

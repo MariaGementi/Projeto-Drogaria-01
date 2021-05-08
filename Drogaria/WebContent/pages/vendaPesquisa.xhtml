@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="/templates/modeloGeral.xhtml">
+	<ui:define name="conteudo">
+		<h:form id="frmVendasPesquisa">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText style="font-size:25px;" value="Vendas" />
+				</f:facet>
+			</p:toolbar>
+
+			<h:panelGrid columns="5">
+				<p:outputLabel style="font-size:15px;" value="Data Inicial:" />
+				<p:calendar value="#{vendaBean.filtro.dataInicial}" />
+
+				<p:outputLabel style="font-size:15px;" value="Data Final:" />
+				<p:calendar value="#{vendaBean.filtro.dataFinal}" />
+
+				<p:commandButton style="font-size:15px;" value="Buscar" actionListener="#{vendaBean.buscar}"
+					update=":msgGlobal :frmVendasPesquisa:tblVendasPesquisa" />
+			</h:panelGrid>
+
+			<p:separator />
+
+			<p:dataTable id="tblVendasPesquisa" emptyMessage="Nenhum registro encontrado."
+				value="#{vendaBean.listaVendasFiltradas}" var="venda" rows="10"
+				paginator="true">
+
+				<p:column headerText="Código" style="width: 6%">
+					<h:outputText style="font-size:15px;" value="#{venda.codigo}" />
+				</p:column>
+
+				<p:column headerText="Horário" style="width: 6%">
+					<h:outputText style="font-size:15px;" value="#{venda.horario}" >
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+					timeZone="America/Sao_Paulo"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Valor Total" style="width: 6%">
+					<h:outputText style="font-size:15px;" value="#{venda.valor}" >
+					<f:convertNumber pattern="0.00"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Funcionário" style="width: 6%">
+					<h:outputText style="font-size:15px;" value="#{venda.funcionario.nome}" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

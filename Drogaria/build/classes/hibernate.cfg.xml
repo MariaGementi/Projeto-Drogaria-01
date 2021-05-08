@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory>
+
+		<!-- Configurações da conexão com o banco de dados -->
+
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property> <!-- Driver de conexão. -->
+
+		<!-- <property name="connection.url">jdbc:mysql://localhost/seonline</property> -->
+
+		<property name="connection.url">jdbc:mysql://localhost:3306/db_drogaria</property>
+		<property name="connection.username">root</property> <!-- Usuário do banco de dados. -->
+		<property name="connection.password">q1w2e3r4</property> <!-- Senha do banco de dados. -->
+
+		<property name="connection.autoReconnect">true</property>
+		<property name="connection.autoReconnectForPools">true</property>
+		<property name="connection.useSSL">true</property>
+
+		<!-- Configurações da conexão com o banco de dados -->
+
+		<!-- Número de conexões JDBC -->
+		<property name="connection.pool_size">1</property>
+		<!-- Número de conexões -->
+
+		<!-- Dialeto do banco de dados -->
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!-- Dialeto do banco de dados -->
+
+		<!-- Gerenciamento automático de sessão através do hibernate -->
+		<property name="current_session_context_class">thread</property>
+		<!-- Gerenciamento automático de sessão através do hibernate -->
+
+		<!-- Desabitar cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Exive os comandos SQL -->
+		<property name="show_sql">true</property>
+
+		<!-- Cria as tabelas -->
+		<property name="hbm2ddl.auto">validate</property>
+
+		<!-- mapping mapeamento da entidade -->
+		<mapping class="br.com.drogaria.domain.Fabricante" />
+		<mapping class="br.com.drogaria.domain.Funcionario" />
+		<mapping class="br.com.drogaria.domain.Produto" />
+		<mapping class="br.com.drogaria.domain.Vendas" />
+		<mapping class="br.com.drogaria.domain.Itens" />
+
+	</session-factory>
+
+</hibernate-configuration>
