@@ -1,6 +1,6 @@
 # Projeto-Drogaria
 <p align="center">Primeiro projeto desenvolvido com Java-8 para Web.</p>
-O projeto possui um Front-end simples e de facil entendimento e seu Back-end possui total funcionalidade e de simples compreenção.
+O projeto possui um Front-end simples e de facil entendimento e seu Back-end possui total funcionalidade e de simples compreensão.
 <p align="center">
  <a href="#Primefaces">Primefaces</a> •
    <a href="#Hibernate">Hibernate</a> •
